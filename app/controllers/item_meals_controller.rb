@@ -1,5 +1,5 @@
 class ItemMealsController < ApplicationController
-  before_action :set_item_meal, only: [:show, :edit, :update, :destroy]
+  before_action :set_item_meal, only: [:show, :update, :destroy]
 
   
  
@@ -41,10 +41,16 @@ class ItemMealsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_item_meal
       @item_meal = ItemMeal.find(params[:id])
+      token = request.header[:token]
+      
+      if token != @item_meal.user.auth_code
+        render json: "Forbidden", status: 403
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_meal_params
-      params.require(:item_meal).permit(:quantity, :item_id, :meal_id)
+      params.require(:item_meal).permit(:quantity, :item_id)
     end
+
 end

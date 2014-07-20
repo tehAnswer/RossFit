@@ -48,11 +48,11 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.json
   def destroy
-    #@item.destroy
-    #respond_to do |format|
-    #  format.html { redirect_to items_url }
-    #  format.json { head :no_content }
-    #end
+    if @item.destroy
+      head :no_content, status: 200
+    else
+      render json: @item.errors, status: 405
+    end
   end
 
   private

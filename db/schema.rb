@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140719155526) do
+ActiveRecord::Schema.define(version: 20140720121136) do
 
   create_table "item_meals", force: true do |t|
     t.decimal  "quantity"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20140719155526) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   add_index "meals", ["user_id"], name: "index_meals_on_user_id"

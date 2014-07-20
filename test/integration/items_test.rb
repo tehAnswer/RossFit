@@ -3,7 +3,7 @@ require 'test_helper'
 class ItemsTest < ActionDispatch::IntegrationTest
 
 	setup do 
-		Item.create!(name: "Magikarp",
+		Item.create(name: "Magikarp",
 					fat: 19.0,
 					carbohydrates: 10,
 					protein: 1,
@@ -14,7 +14,7 @@ class ItemsTest < ActionDispatch::IntegrationTest
 
 	end
 	
-	test "create a item" do
+	test "create an item" do
 		item = {
 			item: {
 				name: "Banana",
@@ -41,27 +41,45 @@ class ItemsTest < ActionDispatch::IntegrationTest
 	
 	end
 
-	test "update a item" do
-		item = Item.all.first
-		id = item.id
+	test "update an item" do
+		id = Item.all.first.id
+		name = Random.rand(100).to_s + "update" + Random.rand(100).to_s
 		item = {
 			item: {
-				name: "update"
+				name: name,
+				item_type: "Fish"
 			} 
 		}
 		patch "/items/#{id}", item,  {"Accept" => "application/json"}
 		assert_equal response.status, 204
 		get "/items/#{id}"
-		
+
 		item = json(response.body)[:item]
-		assert_equal item[:name], "update"
+		assert_equal item[:name], name
 	end
 
 	test "delete a no-reference item" do
-
+		item = Item.find_by(name: "Magikarp")
+		delete "/items/#{item.id}"
+		assert_equal response.status, 204
 	end
 
 	test "try to delete a reference item" do
+		item = Item.create!(name: "Nicki Minaj",
+					fat: 19.0,
+					carbohydrates: 10,
+					protein: 1,
+					calories: 30,
+					description: "I endorse that b*tches.",
+					item_type: "Meat"
+			)
+		meal = Meal.create!(name: "Nicki with mustard",
+					time: "00:59")
+		item_meal = ItemMeal.create!(item_id: item.id,
+								meal_id: meal.id)
+		delete "/items/#{item.id}"
+		assert_equal response.status, 405
+
 
 	end
 
