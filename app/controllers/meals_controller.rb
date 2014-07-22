@@ -1,7 +1,7 @@
 class MealsController < ApplicationController
 
   before_action :set_meal, only: [:show, :update, :destroy]
-  before_action :check_for_user, except: [:index, :create]
+  before_action :check_for_user_meal, except: [:index, :create]
   before_action :check_if_user_exists, only: :create
 
   # GET /meals
@@ -60,25 +60,8 @@ class MealsController < ApplicationController
       @meal = Meal.find(params[:id])
     end
 
-    def check_for_user
-      token = request.headers[:token]
-
-      if token.nil?
-        render json: "Unathorized", status: 401
-      elsif @meal.user.auth_code != token
-         render json: "Forbidden", status: 403
-      end 
-    end
-
-    
-    def check_if_user_exists
-      token = request.headers[:token]
-      user = User.find_by(auth_code: token)
-      if token.nil? || user.nil?
-        render json: "Bad credentials", status: 401
-      else
-        @user_id = user.id
-      end 
+    def check_for_user_meal
+      check_for_user(@meal)
     end
 
 

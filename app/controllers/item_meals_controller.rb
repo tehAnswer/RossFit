@@ -1,17 +1,17 @@
 class ItemMealsController < ApplicationController
   before_action :set_item_meal, only: [:show, :update, :destroy]
+  before_action :check_for_user_item_meal, except: [:index, :create]
+  before_action :check_if_user_exists, only: :create
 
-  
- 
   # POST /item_meals
   # POST /item_meals.json
   def create
     @item_meal = ItemMeal.new(item_meal_params)
 
     if @item_meal.save
-      render json: item_meal.meal, status: 200
-    else
-      render json: item_meal.errors, status: 422
+      render json: @item_meal, status: 201
+    else  
+      render json: @item_meal.errors, status: 422
     end
   end
 
@@ -31,26 +31,26 @@ class ItemMealsController < ApplicationController
   # DELETE /item_meals/1
   # DELETE /item_meals/1.json
   def destroy
-    @item_meal.destroy
-    respond_to do |format|
-      format.json { head :no_content }
+    if @meal.destroy
+      head :no_content, status: 204
+    else
+      render json: @meal.errors, status: 405
     end
+  end
+
+  def check_for_user_item_meal
+    check_for_user(@item_meal)
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item_meal
       @item_meal = ItemMeal.find(params[:id])
-      token = request.header[:token]
-      
-      if token != @item_meal.user.auth_code
-        render json: "Forbidden", status: 403
-      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_meal_params
-      params.require(:item_meal).permit(:quantity, :item_id)
+      params.require(:item_meal).permit(:quantity, :item_id, :meal_id)
     end
 
 end
