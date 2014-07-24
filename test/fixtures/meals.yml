@@ -2,8 +2,8 @@
 
 one:
   time: MyString
-  user_id: 
+  meal_id: 
 
 two:
   time: MyString
-  user_id: 
+  meal_id:

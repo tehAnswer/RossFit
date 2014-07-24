@@ -1,11 +1,11 @@
 RossfitApi::Application.routes.draw do
 
-  resources :item_meals
+  resources :diets
 
-  resources :meals
-
-  resources :items
-
-  resources :users, only: :create
-  get '/login' => 'login#login'
+	resources :item_meals
+	resources :meals
+	resources :items
+	resources :users, only: :create
+	get '/login' => 'login#login'
+  
 end

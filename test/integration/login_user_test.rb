@@ -5,6 +5,7 @@ class LoginUserTest < ActionDispatch::IntegrationTest
 	setup do 
 		user = User.create!(username:"user", password:"password", password_confirmation:"password", email:"example@example.com")
 		user.register
+
 	end
 
 	test "valid login retuns the auth code" do

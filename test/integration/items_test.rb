@@ -38,7 +38,6 @@ class ItemsTest < ActionDispatch::IntegrationTest
 			assert_equal item[:description], "The banana is a really enjoyable fruit."
 			assert_equal item[:item_type], "Fruit"
 
-	
 	end
 
 	test "update an item" do

@@ -5,17 +5,20 @@ class MealsTest < ActionDispatch::IntegrationTest
 	setup do 
 		user1 = User.create!(username:"NickiiiMinaj", password:"password", password_confirmation:"password", email:"nicki@minaj.com")
 		user1.register
+		diet1 = Diet.create!(name:"My Diet", diet_type: "Other", user: user1)
 		user2 = User.create!(username:"Fasfas", password:"password", password_confirmation:"password", email:"fasfas@minaj.com")
 		user2.register
-		host! "localhost:3000"
+		diet2 = Diet.create!(name:"My Diet", diet_type: "Other", user: user2)
 	end
 
 test "create a empty meal" do
 	@user = User.find_by(username: "NickiiiMinaj")
+
 	meal = {
 		meal: {
 			name: "Nicki Minaj",
-			time: "00:45"
+			time: "00:45",
+			diet_id: @user.diets.first.id
 			}
 		}
 		post '/meals', meal, {"Accept" => "application/json"}
@@ -31,7 +34,8 @@ test "create a empty meal" do
 		meal = {
 		meal: {
 			name: "Nicki Minaj",
-			time: "00:45"
+			time: "00:45",
+			diet_id: @user.diets.first.id
 			}
 		}
 		post '/meals', meal, {"Accept" => "application/json", "Token" => @user.auth_code}
@@ -60,7 +64,8 @@ test "create a empty meal" do
 		meal = {
 		meal: {
 			name: "delete",
-			time: "18:23"
+			time: "18:23",
+			diet_id: @user1.diets.first.id
 			}
 		}
 		post '/meals', meal, {"Accept" => "application/json", "Token" => @user1.auth_code}

@@ -1,9 +1,10 @@
 class ItemMealsTest < ActionDispatch::IntegrationTest
 
   setup do
-    user = User.create(username:"Nicki", password:"password", password_confirmation:"password", email:"nicki@minaj.com")
+    user = User.create!(username:"Nicki", password:"password", password_confirmation:"password", email:"nicki@minaj.com")
     user.register
-    meal = Meal.create(name: "Gotcha", time:"00:19", user: user)
+    diet = Diet.create!(name:"My Diet", diet_type: "Other", user: user)
+    meal = Meal.create!(name: "Gotcha", time:"00:19", diet: diet)
 
     item = Item.create(name: "Magikarp",
           fat: 19.0,
@@ -24,6 +25,7 @@ class ItemMealsTest < ActionDispatch::IntegrationTest
       )
 
     ItemMeal.create(item: item, meal: meal, quantity: 300)
+
   end
 
   test "create an item meal" do

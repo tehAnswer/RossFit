@@ -1,6 +1,6 @@
 class ItemMealsController < ApplicationController
   before_action :set_item_meal, only: [:show, :update, :destroy]
-  before_action :check_for_user_item_meal, except: [:index, :create]
+  before_action :check_for_user_item_meal, except: [:create]
   before_action :check_if_user_exists, only: :create
 
   # POST /item_meals
@@ -31,10 +31,10 @@ class ItemMealsController < ApplicationController
   # DELETE /item_meals/1
   # DELETE /item_meals/1.json
   def destroy
-    if @meal.destroy
+    if @item_meal.destroy
       head :no_content, status: 204
     else
-      render json: @meal.errors, status: 405
+      render json: @item_meal.errors, status: 405
     end
   end
 
