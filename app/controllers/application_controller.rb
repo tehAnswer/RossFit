@@ -16,11 +16,12 @@ class ApplicationController < ActionController::Base
 
   def check_for_user(item)
   	token = request.headers[:token]
+    user = User.find_by(auth_code: token)
   	if token.nil?
   		render json: "Unathorized", status: 401
   	elsif item.user.auth_code != token
   		render json: "Forbidden", status: 403
-  	end 
+  	end
   end
 
 end
