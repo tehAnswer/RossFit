@@ -21,7 +21,8 @@ class LoginUserTest < ActionDispatch::IntegrationTest
 		assert_equal response.content_type, Mime::JSON
 
 		json = json(response.body)
-		assert_equal json[:token], User.find_by(username:"user").auth_code
+
+		assert_equal json[:user][:auth_code], User.find_by(username:"user").auth_code
 	end
 
 

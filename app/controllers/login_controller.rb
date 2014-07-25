@@ -3,9 +3,9 @@ class LoginController < ApplicationController
 	def login
 		username = request.params[:login][:username]
 		password = request.params[:login][:password]
-		user = User.find_by(username: username) #, password_digest: password)
-		if !user.nil? && user.password = password
-			render json: { token: user.auth_code }, status: :ok
+		@user = User.find_by(username: username) #, password_digest: password)
+		if !@user.nil? && @user.password = password
+			render 'users/login', status: 200
 		else
 			render json: "Bad username/password combination", status: 401
 		end
