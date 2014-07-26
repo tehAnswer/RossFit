@@ -1,8 +1,8 @@
 class DietsController < ApplicationController
 
-  before_action :set_diet, only: [:show, :edit, :update, :destroy]
-  before_action :check_for_user_diet, except: [:create]
+  before_action :set_diet, only: [:show, :update, :destroy]
   before_action :check_if_user_exists, only: :create
+  before_action :check_for_user_diet, except: [:create]
 
 
   # GET /diets/1
@@ -20,6 +20,7 @@ class DietsController < ApplicationController
   # POST /diets.json
   def create
     @diet = Diet.new(diet_params)
+    @diet.user = @current_user
 
     if @diet.save
       render json: @diet, status: 201, location: @diet
@@ -31,8 +32,7 @@ class DietsController < ApplicationController
   # PATCH/PUT /diets/1
   # PATCH/PUT /diets/1.json
   def update
-    if @diet.update(diet_params_update)
-      debugger if request.headers[:debugg]
+    if @diet.update(diet_params)
       head :no_content, status: 204
     else
       render json: @diet.errors, status: 422
@@ -61,10 +61,6 @@ class DietsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def diet_params
-      params.require(:diet).permit(:name, :comment, :diet_type, :user_id)
-    end
-
-    def diet_params_update
       params.require(:diet).permit(:name, :comment, :diet_type)
     end
 end

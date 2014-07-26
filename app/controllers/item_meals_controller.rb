@@ -1,7 +1,7 @@
 class ItemMealsController < ApplicationController
   before_action :set_item_meal, only: [:show, :update, :destroy]
-  before_action :check_for_user_item_meal, except: [:create]
   before_action :check_if_user_exists, only: :create
+  before_action :check_for_user_item_meal, except: [:create]
 
   # POST /item_meals
   # POST /item_meals.json

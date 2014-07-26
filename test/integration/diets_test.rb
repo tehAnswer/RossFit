@@ -59,6 +59,7 @@ class DietsTest < ActionDispatch::IntegrationTest
 		uri = response.location.split("/").last(2).join("/")
 
 		patch uri, wrong_diet, {"Accept" => "application/json", "Token" => @user.auth_code }
+		
 		# Saved update but ignored wrong user_id
 		assert_equal 204, response.status
 		
