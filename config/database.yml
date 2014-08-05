@@ -7,14 +7,12 @@ development:
   username: miapp 
   password: 
  
-test: 
-  adapter: postgresql 
-  encoding: utf-8 
-  database: miapp_test 
-  pool: 5 
-  username: miapp 
-  password: 
- 
+test:
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
+
 production: 
   adapter: postgresql 
   encoding: utf-8 
