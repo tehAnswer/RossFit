@@ -8,7 +8,9 @@ class LoginController < ApplicationController
 		puts "Request params: #{params},
 					username_var: #{username},
 					password_var: #{password},
-					user_var: #{@user}"
+					user_pass: #{@user.password}"
+
+
 			
 		if !@user.nil? && @user.password = password
 			render 'users/login', status: 200
