@@ -5,10 +5,7 @@ class LoginController < ApplicationController
 		password = request.params[:login][:password]
 		@user = User.find_by(username: username) #, password_digest: password)
 		
-		puts "Request params: #{params},
-         username_var: #{username},
-         password_var: #{password},
-         user_var: #{user}"
+		puts "Request params: #{params},username_var: #{username},password_var: #{password}, user_var: #{@user}"
 			
 		end
 
