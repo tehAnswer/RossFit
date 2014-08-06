@@ -5,7 +5,12 @@ class LoginController < ApplicationController
 		password = request.params[:login][:password]
 		@user = User.find_by(username: username) #, password_digest: password)
 		
-		puts params
+		puts "Request params: #{params},
+         username_var: #{username},
+         password_var: #{password},
+         user_var: #{user}"
+			
+		end
 
 		if !@user.nil? && @user.password = password
 			render 'users/login', status: 200
