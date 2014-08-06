@@ -1,8 +1,8 @@
 # config/database.yml 
 development: 
-  adapter: postgresql 
-  encoding: utf-8 
-  database: miapp_development 
+ adapter: postgresql 
+ encoding: utf-8 
+ database: miapp_development 
   pool: 5 
   username: miapp 
   password: 
@@ -22,3 +22,6 @@ production:
   pool: 5 
   username: miapp 
   password:
+
+
+
