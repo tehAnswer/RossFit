@@ -5,7 +5,7 @@ attributes :id, :username, :email, :auth_code
 child :diets do 
   attributes :id, :name, :comment, :diet_type
 
-  child :meals do
+  child :ordered_meals do
     attributes :id, :name, :time
 
     child :item_meals do

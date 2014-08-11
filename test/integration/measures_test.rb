@@ -1,7 +1,8 @@
-class MeasureTest < ActionDispatch::IntegrationTest
+class MeasuresTest < ActionDispatch::IntegrationTest
 
   setup do
     user = User.create!(username:"Nicki", password:"password", password_confirmation:"password", email:"nicki@minaj.com")
+    user.register
   end
 
   test "create a measure" do
@@ -23,32 +24,23 @@ class MeasureTest < ActionDispatch::IntegrationTest
 
   test "edit a measure" do
     user = User.find_by(username:"Nicki")
-    measure = {
+    measure = Measure.create!(height: 170, weight: 200, user: user)
+
+
+    update = {
       measure: {
         height: "160"
       }
     }
-    patch "/measures", measure, {"Accept" => "application/json", "Token" => user.auth_code}
+    patch "/measures/#{measure.id}", update, {"Accept" => "application/json", "Token" => user.auth_code}
     assert_equal 204, response.status 
-    patch "/measures", measure, {"Accept" => "application/json", "Token" => "fake"}
+    patch "/measures/#{measure.id}", update, {"Accept" => "application/json", "Token" => "fake"}
     assert_equal 403, response.status
   end
 
-   test "edit a measure" do
-    user = User.find_by(username:"Nicki")
-    measure = {
-      measure: {
-        height: "160"
-      }
-    }
-    patch "/measures", measure, {"Accept" => "application/json", "Token" => user.auth_code}
-    assert_equal 204, response.status 
-    patch "/measures", measure, {"Accept" => "application/json", "Token" => "fake"}
-    assert_equal 403, response.status
-  end
 
   test "delete a measure" do
-    measure = Measure.first
+    measure = Measure.create!(height: 170, weight: 200, user: User.first)
 
     delete "/measures/#{measure.id}"
     assert_equal 401, response.status
@@ -56,7 +48,7 @@ class MeasureTest < ActionDispatch::IntegrationTest
     delete "/measures/#{measure.id}", {}, {"Accept" => "application/json", "Token" => "fake"}
     assert_equal 403, response.status
 
-    delete "/measure/#{measure.id}", {}, {"Accept" => "application/json", "Token" => measure.user.auth_code }
+    delete "/measures/#{measure.id}", {}, {"Accept" => "application/json", "Token" => measure.user.auth_code }
     assert_equal 204, response.status
   end 
 end

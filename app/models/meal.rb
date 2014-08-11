@@ -8,4 +8,6 @@ class Meal < ActiveRecord::Base
 		with: %r{(2[0-3]|1[0-9]|0[0-9]):([0-5][0-9])},
 		message: "must be HH:MM."
 	}
+
+	scope :by_time, -> { order('time ASC') }
 end

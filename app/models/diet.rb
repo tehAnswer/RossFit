@@ -6,4 +6,9 @@ class Diet < ActiveRecord::Base
 	validates :name, :diet_type, presence: true
 	validates :diet_type, inclusion: DIET_TYPES
 
+
+	def ordered_meals
+		meals.by_time
+	end
+
 end
