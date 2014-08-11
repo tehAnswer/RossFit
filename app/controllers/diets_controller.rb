@@ -8,7 +8,7 @@ class DietsController < ApplicationController
   # GET /diets/1
   # GET /diets/1.json
   def show
-    render json: @diet, status: 200
+    render json: @diet, status: 200, root: true
   end
 
   # GET /diets/new
@@ -23,7 +23,7 @@ class DietsController < ApplicationController
     @diet.user = @current_user
 
     if @diet.save
-      render json: @diet, status: 201, location: @diet
+      render json: @diet, status: 201, location: @diet, root: true
     else
       render json: @diet.errors, status: 422
     end

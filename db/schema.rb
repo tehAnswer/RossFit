@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724130847) do
+ActiveRecord::Schema.define(version: 20140811170747) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "diets", force: true do |t|
     t.string   "name"
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 20140724130847) do
     t.integer  "user_id"
   end
 
-  add_index "diets", ["user_id"], name: "index_diets_on_user_id"
+  add_index "diets", ["user_id"], name: "index_diets_on_user_id", using: :btree
 
   create_table "item_meals", force: true do |t|
     t.decimal  "quantity"
@@ -32,8 +35,8 @@ ActiveRecord::Schema.define(version: 20140724130847) do
     t.datetime "updated_at"
   end
 
-  add_index "item_meals", ["item_id"], name: "index_item_meals_on_item_id"
-  add_index "item_meals", ["meal_id"], name: "index_item_meals_on_meal_id"
+  add_index "item_meals", ["item_id"], name: "index_item_meals_on_item_id", using: :btree
+  add_index "item_meals", ["meal_id"], name: "index_item_meals_on_meal_id", using: :btree
 
   create_table "items", force: true do |t|
     t.string   "name"
@@ -55,7 +58,15 @@ ActiveRecord::Schema.define(version: 20140724130847) do
     t.integer  "diet_id"
   end
 
-  add_index "meals", ["diet_id"], name: "index_meals_on_diet_id"
+  add_index "meals", ["diet_id"], name: "index_meals_on_diet_id", using: :btree
+
+  create_table "measures", force: true do |t|
+    t.integer  "height"
+    t.decimal  "weight"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "username"

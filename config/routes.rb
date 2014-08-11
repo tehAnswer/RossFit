@@ -1,5 +1,7 @@
 RossfitApi::Application.routes.draw do
 
+  resources :measures
+
   resources :diets
 
 	resources :item_meals
