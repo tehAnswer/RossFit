@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    items = Item.all
+    items = Item.alphabetical_order
     if item_type = params[:item_type]
       items = items.where(item_type: item_type)
     end

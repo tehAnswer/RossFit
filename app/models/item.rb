@@ -11,6 +11,8 @@ class Item < ActiveRecord::Base
 
 	before_destroy :ensure_not_referenced
 
+	scope :alphabetical_order, -> { order('name ASC') }
+
 
 	def ensure_not_referenced
 		if item_meals.empty?
