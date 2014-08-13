@@ -19,7 +19,11 @@ class DietsController < ApplicationController
   # POST /diets
   # POST /diets.json
   def create
+
+    debugger
     @diet = Diet.new(diet_params)
+
+
     @diet.user = @current_user
 
     if @diet.save
