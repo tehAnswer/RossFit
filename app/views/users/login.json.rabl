@@ -10,11 +10,7 @@ child :diets do
 
     child :item_meals do
 
-      attributes :quantity, :id
-
-      child :item do
-        attributes :id, :name, :protein, :carbohydrates, :fat, :item_type, :description
-      end
+      attributes :quantity, :id, :item_id
     end
   end
 end
