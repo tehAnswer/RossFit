@@ -14,7 +14,3 @@ child :diets do
     end
   end
 end
-
-child :measures do
-  attributes :id, :created_at, :height, :weight
-end
