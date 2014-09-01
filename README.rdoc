@@ -1,28 +1,49 @@
-== README
+== RossFit API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+It's my design of a RESTful API usign Ruby on Rails. It's the server side part of one personal project of making an app for mobile devices (Android, iOS).
 
-Things you may want to cover:
+### Routes
 
-* Ruby version
+The endpoints are the following ones:
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+```
+        Prefix Verb   URI Pattern                    Controller#Action
+      measures POST   /measures(.:format)            measures#create
+   new_measure GET    /measures/new(.:format)        measures#new
+  edit_measure GET    /measures/:id/edit(.:format)   measures#edit
+       measure GET    /measures/:id(.:format)        measures#show
+               PATCH  /measures/:id(.:format)        measures#update
+               PUT    /measures/:id(.:format)        measures#update
+               DELETE /measures/:id(.:format)        measures#destroy
+         diets POST   /diets(.:format)               diets#create
+      new_diet GET    /diets/new(.:format)           diets#new
+     edit_diet GET    /diets/:id/edit(.:format)      diets#edit
+          diet GET    /diets/:id(.:format)           diets#show
+               PATCH  /diets/:id(.:format)           diets#update
+               PUT    /diets/:id(.:format)           diets#update
+               DELETE /diets/:id(.:format)           diets#destroy
+    item_meals POST   /item_meals(.:format)          item_meals#create
+ new_item_meal GET    /item_meals/new(.:format)      item_meals#new
+edit_item_meal GET    /item_meals/:id/edit(.:format) item_meals#edit
+     item_meal GET    /item_meals/:id(.:format)      item_meals#show
+               PATCH  /item_meals/:id(.:format)      item_meals#update
+               PUT    /item_meals/:id(.:format)      item_meals#update
+               DELETE /item_meals/:id(.:format)      item_meals#destroy
+         meals POST   /meals(.:format)               meals#create
+      new_meal GET    /meals/new(.:format)           meals#new
+     edit_meal GET    /meals/:id/edit(.:format)      meals#edit
+          meal GET    /meals/:id(.:format)           meals#show
+               PATCH  /meals/:id(.:format)           meals#update
+               PUT    /meals/:id(.:format)           meals#update
+               DELETE /meals/:id(.:format)           meals#destroy
+         items GET    /items(.:format)               items#index
+               POST   /items(.:format)               items#create
+      new_item GET    /items/new(.:format)           items#new
+     edit_item GET    /items/:id/edit(.:format)      items#edit
+          item GET    /items/:id(.:format)           items#show
+               PATCH  /items/:id(.:format)           items#update
+               PUT    /items/:id(.:format)           items#update
+               DELETE /items/:id(.:format)           items#destroy
+         users POST   /users(.:format)               users#create
+         login GET    /login(.:format)               login#login
+```
