@@ -2,12 +2,11 @@
 
 It's my design of a RESTful API usign Ruby on Rails. It's the server side part of one personal project of making an app for mobile devices (Android, iOS).
 
-### Routes
+=== Routes
 
 The endpoints are the following ones:
 
-```
-        Prefix Verb   URI Pattern                    Controller#Action
+        Prefix Verb  URI Pattern                    Controller#Action
       measures POST   /measures(.:format)            measures#create
    new_measure GET    /measures/new(.:format)        measures#new
   edit_measure GET    /measures/:id/edit(.:format)   measures#edit
@@ -24,7 +23,7 @@ The endpoints are the following ones:
                DELETE /diets/:id(.:format)           diets#destroy
     item_meals POST   /item_meals(.:format)          item_meals#create
  new_item_meal GET    /item_meals/new(.:format)      item_meals#new
-edit_item_meal GET    /item_meals/:id/edit(.:format) item_meals#edit
+ edit_item_meal GET    /item_meals/:id/edit(.:format) item_meals#edit
      item_meal GET    /item_meals/:id(.:format)      item_meals#show
                PATCH  /item_meals/:id(.:format)      item_meals#update
                PUT    /item_meals/:id(.:format)      item_meals#update
@@ -46,4 +45,4 @@ edit_item_meal GET    /item_meals/:id/edit(.:format) item_meals#edit
                DELETE /items/:id(.:format)           items#destroy
          users POST   /users(.:format)               users#create
          login GET    /login(.:format)               login#login
-```
+
