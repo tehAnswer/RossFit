@@ -1,6 +1,7 @@
 class LoginController < ApplicationController
 
 	def login
+		puts request.headers[:token]
 		username = request.params[:login][:username]
 		password = request.params[:login][:password]
 		@user = User.find_by(username: username)
