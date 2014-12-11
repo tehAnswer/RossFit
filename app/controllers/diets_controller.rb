@@ -2,12 +2,12 @@ class DietsController < ApplicationController
 
   before_action :set_diet, only: [:show, :update, :destroy]
   before_action :check_if_user_exists, only: :create
-  before_action :check_for_user_diet, except: [:create]
+  before_action :check_for_user_diet, except: [:create, :index]
 
 
   def index
     @diets = Diet.all
-    render json: @diets
+    render json: @diets, root: true
   end
 
   # GET /diets/1
