@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
     if item_type = params[:item_type]
       items = items.where(item_type: item_type)
     end
-    render json: { item_list: { items: items } }, status: 200
+    render json: items, status: 200
   end
 
   # GET /items/1

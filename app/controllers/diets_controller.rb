@@ -5,6 +5,11 @@ class DietsController < ApplicationController
   before_action :check_for_user_diet, except: [:create]
 
 
+  def index
+    @diets = Diet.all
+    render json: @diets
+  end
+
   # GET /diets/1
   # GET /diets/1.json
   def show
