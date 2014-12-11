@@ -7,7 +7,7 @@ class DietsController < ApplicationController
 
   def index
     @diets = Diet.all
-    render json: @diets, root: true
+    render json: diets: { @diets } 
   end
 
   # GET /diets/1
